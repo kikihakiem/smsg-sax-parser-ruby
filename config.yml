@@ -1,0 +1,7 @@
+---
+:db_connection:
+  :host: 127.0.0.1
+  :database: sax
+  :username: root
+
+:batch_size: 10_000

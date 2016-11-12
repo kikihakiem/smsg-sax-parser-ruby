@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mysql2 (0.4.5)
+    ox (2.4.5)
+    parallel (1.9.0)
+    ruby-progressbar (1.8.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mysql2
+  ox
+  parallel
+  ruby-progressbar
+
+BUNDLED WITH
+   1.11.2
