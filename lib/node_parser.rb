@@ -29,7 +29,7 @@ module NodeParser
 
   def self.each_node(path)
     proc = Proc.new do |table_name, attributes|
-      yield [table_name, attributes]
+      yield(table_name, attributes)
     end
 
     handler = Handler.new(proc)
