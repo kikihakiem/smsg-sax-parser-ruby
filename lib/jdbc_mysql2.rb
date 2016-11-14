@@ -13,9 +13,9 @@ module Mysql2
       use_db = !(sql =~ /^(create|drop) database/)
       with_connection(use_db) do |statement|
         if sql.start_with? 'show'
-          results = statement.execute_query sql
+          results = resultset_to_hash(statement.execute_query(sql))
         else
-          results = statement.execute_update sql
+          results = statement.execute_update(sql)
         end
       end
 
@@ -33,6 +33,21 @@ module Mysql2
 
     def escape(value)
       value.gsub("'", "\\'")
+    end
+
+    private
+
+    def resultset_to_hash(resultset)
+      rows = []
+      while resultset.next
+        row = {}
+        row[:Type] = resultset.get_string('Type')
+        row[:Field] = resultset.get_string('Field')
+
+        rows << row
+      end
+
+      rows
     end
   end
 
