@@ -3,7 +3,7 @@ module SqlHelper
     attr_reader :name
     attr_accessor :data_type, :max_size
 
-    STR_LEN = [12, 32, 64, 256]
+    STR_LEN = [16, 40, 64, 256]
     TYPE_ORDER = {int: 1, varchar: 2, text: 3}
 
     def initialize(name, data_type = :int, max_size = 11)

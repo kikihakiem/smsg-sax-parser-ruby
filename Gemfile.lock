@@ -1,19 +1,24 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    jdbc-mysql (5.1.39)
     mysql2 (0.4.5)
+    nokogiri (1.6.8.1-java)
     ox (2.4.5)
     parallel (1.9.0)
     ruby-progressbar (1.8.1)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
+  jdbc-mysql
   mysql2
+  nokogiri
   ox
   parallel
   ruby-progressbar
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

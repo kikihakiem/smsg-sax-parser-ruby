@@ -1,7 +1,11 @@
 # use fake_mysql2 to eliminate network & DB overhead
 # so we can focus on our code performance
 # require './fake_mysql2'
-require 'mysql2'
+if RUBY_PLATFORM.eql?('java')
+  require_relative '../jdbc_wrapper'
+else
+  require 'mysql2'
+end
 
 module SqlHelper
   class Accumulator
