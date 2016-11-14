@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
 
 require './lib/extensions'
-require './lib/management_node_parser'
-require './lib/node_parser'
+
+if RUBY_PLATFORM.eql?('java')
+  require './lib/jruby_compatible/management_node_parser'
+  require './lib/jruby_compatible/node_parser'
+else
+  require './lib/management_node_parser'
+  require './lib/node_parser'
+end
+
 require './lib/sql_helper'
 require 'ruby-progressbar'
 require 'parallel'
@@ -22,7 +29,7 @@ SqlHelper.accumulate(config) do |accumulator|
   end
 end
 
-# Dir[File.join('xml', 'eNB_256.xml')].each do |xml_file|
+# Dir[File.join('..', 'samsung-sax-parser', 'xml', 'eNB_256.xml')].each do |xml_file|
 Parallel.each(Dir[File.join('..', 'samsung-sax-parser', 'xml', 'eNB_*.xml')], progress: 'Parsing XML files') do |xml_file|
   SqlHelper.accumulate(config) do |accumulator|
     NodeParser.each_node(xml_file) do |table_name, result|

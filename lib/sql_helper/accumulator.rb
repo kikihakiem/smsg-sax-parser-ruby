@@ -1,7 +1,11 @@
 # use fake_mysql2 to eliminate network & DB overhead
 # so we can focus on our code performance
 # require './fake_mysql2'
-require 'mysql2'
+if RUBY_PLATFORM.eql?('java')
+  require_relative '../jdbc_wrapper'
+else
+  require 'mysql2'
+end
 
 module SqlHelper
   class Accumulator
@@ -12,6 +16,7 @@ module SqlHelper
     end
 
     def add_record(table_name, record)
+      return if record.blank?
       if @current_table_name == table_name
         @tables[table_name].add_record(record)
 
@@ -45,7 +50,7 @@ module SqlHelper
 
     def existing_table_fields(table)
       query "show fields from s_#{table.name}", symbolize_keys: true
-    rescue Mysql2::Error => e
+    rescue => e
       nil
     end
 
