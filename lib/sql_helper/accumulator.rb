@@ -12,6 +12,7 @@ module SqlHelper
     end
 
     def add_record(table_name, record)
+      return if record.blank?
       if @current_table_name == table_name
         @tables[table_name].add_record(record)
 
@@ -45,7 +46,7 @@ module SqlHelper
 
     def existing_table_fields(table)
       query "show fields from s_#{table.name}", symbolize_keys: true
-    rescue Mysql2::Error => e
+    rescue => e
       nil
     end
 
